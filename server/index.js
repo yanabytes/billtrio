@@ -4,6 +4,8 @@ const cors = require("cors");
 const EmployeeModel = require('./models/Employee');
 const uploadRouter = require('./routes/router.js');
 const chatgptService = require('./services/chatgptService');  
+const ReceiptModel = require('./models/Receipt');
+const receiptRouter = require('./routes/receipt');
 
 const app = express();
 
@@ -13,6 +15,7 @@ app.use(cors());
 
 // Routes
 app.use('/upload-receipt', uploadRouter);
+app.use('/get-receipt', receiptRouter);
 
 // Connect to MongoDB
 async function connectDB() {
@@ -72,6 +75,7 @@ app.post("/chatgptService", async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 });
+
 
 const PORT = process.env.PORT || 3001;
 
